@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Konfiguration des Anhangsverzeichnis
+%
+% weitere Informationen: https://komascript.de/comment/5578#comment-5578, mit Anpassungen
+% Beispiel: https://komascript.de/comment/5609#comment-5609
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareNewTOC[%
+  owner=\jobname,
+  listname={Anhangsverzeichnis},% Titel des Verzeichnisses
+]{atoc}% Dateierweiterung (a=appendix, toc=table of contents)
+\DeclareNewTOC[%
+  listname={Abbildungen im Anhang},% Titel des Verzeichnisses
+  name=\noexpand\listoflofentryname,
+]{alof}% Dateierweiterung (a=appendix, lof=list of figures)
+\DeclareNewTOC[%
+  listname={Tabellen im Anhang},% Titel des Verzeichnisses
+  name=\noexpand\listoflotentryname
+]{alot}% Dateierweiterung (a=appendix, lot=list of tables)
+
+\makeatletter
+\newcommand*{\useappendixtocs}{%
+  \renewcommand*{\ext@toc}{atoc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=atoc}%
+  }%
+  \renewcommand*{\ext@figure}{alof}%
+  \renewcommand*{\ext@table}{alot}%
+}
+\newcommand*{\usestandardtocs}{%
+  \renewcommand*{\ext@toc}{toc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=toc}%
+  }%
+  \renewcommand*{\ext@figure}{lof}%
+  \renewcommand*{\ext@table}{lot}%
+}
+\scr@ifundefinedorrelax{ext@toc}{%
+  \newcommand*{\ext@toc}{toc}
+  \renewcommand{\addtocentrydefault}[3]{%
+    \expandafter\tocbasic@addxcontentsline\expandafter{\ext@toc}{#1}{#2}{#3}%
+  }
+}{}
+\makeatother
+ 
+\usepackage{xpatch}
+\xapptocmd\appendix{%
+  \addpart{\appendixname}
+  \useappendixtocs
+  \listofatocs
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Optional: Zum Aktivieren eines zusätzlichen Abbildungs- und Tabellenverzeichnis des Anhangs folgendes einkommentieren:
+
+\iffalse %Auskommentiert, ggf. entfernen
+
+\addchap{Abbildungs- und Tabellenverzeichnis des Anhangs}
+\listofalofs
+\listofalots
+
+\fi %Auskommentiert, ggf. entfernen
+
+}{}{}
+
+\BeforeStartingTOC[atoc]{\singlespacing} 
+\BeforeStartingTOC[alot]{\singlespacing\renewcommand\autodot{:}}
+\BeforeStartingTOC[alof]{\singlespacing\renewcommand\autodot{:}}%
