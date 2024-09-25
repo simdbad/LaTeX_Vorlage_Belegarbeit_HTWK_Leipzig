@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HTWK Leipzig LaTeX Vorlage - Belegarbeit
-% Interne Referenznummer 2_10
+% Interne Referenznummer 2_11
 %
 % Das Dokument basiert teilweise auf den Vorlagen von :
 % Markus Voerkel
@@ -23,8 +23,7 @@ listof=entryprefix,
 listof=leveldown,
 fontsize=12pt,
 numbers=noenddot,
-headsepline,
-usegeometry]
+headsepline]
 {scrreprt}
 
 %---------------------------------------
@@ -91,6 +90,9 @@ usegeometry]
     locale=DE,
     per-mode=fraction,
 }
+
+% Bessere Kompatibilität der Dokumentenklasse mit div. Paketen %
+\usepackage{scrhack}
 
 %---------------------------------------
 %	Weitere Konfigurationen
