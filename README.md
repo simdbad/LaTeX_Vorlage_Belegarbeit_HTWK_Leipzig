@@ -22,7 +22,7 @@ Dies ist eine **inoffizielle** LaTeX Vorlage für Belegarbeiten an der HTWK Leip
   
 - In der Repository fehlt der leere Ordner "Inhalte" für Bilder und PDFs
 
-- Download der Vorlage bei Overleaf empfohlen
+- Download der Vorlage bei Overleaf empfohlen: https://de.overleaf.com/latex/templates/belegarbeit-htwk-leipzig/qvfnszstyntg
 
 ## Einrichtung
 
